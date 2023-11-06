@@ -22,12 +22,14 @@ export const router = createBrowserRouter([
       {
         path: "/post/:id",
         element: <PostDetail />,
+        //Xử lý trường hợp không tìm thấy bài viết
+        //Chưa hiểu lắm
         loader: async ({ params }) => {
           const res = await getPost(Number(params?.id));
           if (res.status === 404) {
             throw new Response("Not Found", { status: 404 });
           }
-          return res.data;
+          return res.data;//trả về dữ liệu bài viết được lấy từ cuộc gọi API (res.data)
         },
       },
     ],
