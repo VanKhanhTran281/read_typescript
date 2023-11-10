@@ -4,7 +4,10 @@ import Error404 from "./pages/error/Error404";
 import Home from "./pages/home";
 import Post from "./pages/post";
 import PostDetail from "./pages/post/PostDetail";
+import Album from "./pages/album";
 import { getPost } from "./services/post";
+import AlbumDetail from "./pages/album/AlbumDetail";
+import { getAlbum } from "./services/album";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +23,10 @@ export const router = createBrowserRouter([
         element: <Post />,
       },
       {
+        path: "/album",
+        element: <Album />,
+      },
+      {
         path: "/post/:id",
         element: <PostDetail />,
         //Xử lý trường hợp không tìm thấy bài viết
@@ -30,6 +37,17 @@ export const router = createBrowserRouter([
             throw new Response("Not Found", { status: 404 });
           }
           return res.data;//trả về dữ liệu bài viết được lấy từ cuộc gọi API (res.data)
+        },
+      },
+      {
+        path: "/album/:id",
+        element: <AlbumDetail />,
+        loader: async ({ params }) => {
+          const res = await getAlbum(Number(params?.id));
+          if (res.status === 404) {
+            throw new Response("Not Found", { status: 404 });
+          }
+          return res.data;
         },
       },
     ],

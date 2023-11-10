@@ -33,3 +33,5 @@ export function updatePost(id: string, body: API.CreatePostReq): Promise<AxiosRe
 //trả về một Promise chứa AxiosResponse,dữ liệu là một đối tượng Post (API.Post) đã được cập nhật.
 }
 
+
+

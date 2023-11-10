@@ -17,7 +17,7 @@ const Post = () => {
     //Gán các giá trị ban đầu cho pagination
   });
 
-  useEffect(() => {//useEffect chỉ được gọi lại khi pagination thay đổi
+  const fetchData = ()=>{
     setLoading(true);//Trước khi gọi API để lấy danh sách bài viết, 
     //setLoading được gọi để đặt trạng thái loading thành true, để hiển thị trạng thái loading trong quá trình lấy dữ liệu
     getPosts({//lấy danh sách bài viết. Tham số truyền vào là một đối tượng có hai thuộc tính _limit và _start, 
@@ -32,6 +32,10 @@ const Post = () => {
         //để đặt trạng thái loading thành false, để ẩn trạng thái loading sau khi hoàn thành
         setLoading(false);
       });
+  }
+
+  useEffect(() => {//useEffect chỉ được gọi lại khi pagination thay đổi
+    fetchData()
   }, [pagination]);
 
   return (
@@ -39,7 +43,7 @@ const Post = () => {
       {!loading && (
         <div className="grid gap-2 grid-cols-2">
           {posts?.map((post, i) => {
-            return <PostItem post={post} key={i} />;
+            return <PostItem post={post} key={i} reload={fetchData} />;
           })}
         </div>
       )}

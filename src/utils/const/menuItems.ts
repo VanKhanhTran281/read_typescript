@@ -9,4 +9,8 @@ export const MENU_ITEMS = [
     name: "Post",
     link: ROUTES.post,
   },
+  {
+    name: "Album",
+    link: ROUTES.album,
+  },
 ];
