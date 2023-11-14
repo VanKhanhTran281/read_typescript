@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 interface PhotoFormProps {
   albumId: number;
@@ -6,24 +6,28 @@ interface PhotoFormProps {
   onCancel: () => void;
 }
 
+type DataType = {
+  title: string
+url: string
+thumbnailUrl: string
+}
+
 const PhotoForm: React.FC<PhotoFormProps> = ({albumId, onAddPhoto, onCancel }) => {
-  const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [data, setData] = useState({} as DataType)
+
+  const handleChangeData = (e: ChangeEvent<HTMLInputElement>)=>{
+    const {name, value} = e.target
+    setData({...data,[name] : value}) 
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const payload: API.CreatePhotoReq = {
       albumId,
-      title,
-      url: imageUrl,
-      thumbnailUrl,
+      ...data
     };
     onAddPhoto(payload);
-    setTitle("");
-    setImageUrl("");
-    setThumbnailUrl("");
+    setData({} as DataType)
   };
 
   return (
@@ -36,8 +40,9 @@ const PhotoForm: React.FC<PhotoFormProps> = ({albumId, onAddPhoto, onCancel }) =
           style={{marginLeft:'5px'}}
           type="text"
           id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          name="'title"
+          value={data?.title || ''}
+          onChange={handleChangeData}
         />
       </div>
 
@@ -46,9 +51,10 @@ const PhotoForm: React.FC<PhotoFormProps> = ({albumId, onAddPhoto, onCancel }) =
         <input
           style={{marginLeft:'5px'}}
           type="text"
+          name="imageUrl"
           id="imageUrl"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
+          value={data?.url || ''}
+          onChange={handleChangeData}
         />
       </div>
 
@@ -58,8 +64,9 @@ const PhotoForm: React.FC<PhotoFormProps> = ({albumId, onAddPhoto, onCancel }) =
           style={{marginLeft:'5px'}}
           type="text"
           id="thumbnailUrl"
-          value={thumbnailUrl}
-          onChange={(e) => setThumbnailUrl(e.target.value)}
+          name="thumbnailUrl"
+          value={data?.thumbnailUrl || ''}
+          onChange={handleChangeData}
         />
       </div>
       <div style={{marginTop:'20px'}}>

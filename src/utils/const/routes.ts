@@ -1,5 +1,6 @@
 export const ROUTES = {
   home: "/",
   post: "/post",
-  album:"/album"
+  album:"/album",
+  testredux:"/redux"
 };

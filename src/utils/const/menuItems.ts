@@ -13,4 +13,8 @@ export const MENU_ITEMS = [
     name: "Album",
     link: ROUTES.album,
   },
+  {
+    name: "TestRedux",
+    link: ROUTES.testredux,
+  },
 ];

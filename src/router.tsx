@@ -8,6 +8,7 @@ import Album from "./pages/album";
 import { getPost } from "./services/post";
 import AlbumDetail from "./pages/album/AlbumDetail";
 import { getAlbum } from "./services/album";
+import TestRedux from "./pages/test_redux/TestRedux";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "/album",
         element: <Album />,
+      },
+      {
+        path: "/redux",
+        element: <TestRedux />,
       },
       {
         path: "/post/:id",
