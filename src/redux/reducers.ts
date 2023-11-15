@@ -18,7 +18,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    updateUserData: (state, action: PayloadAction<UserData>) => {
+    updateUser: (state, action: PayloadAction<UserData>) => {
       const updatedUserData = action.payload;
       
       if (Array.isArray(state.data)) {
@@ -28,7 +28,7 @@ const userSlice = createSlice({
         }
       }
     },
-    addUserData: (state, action: PayloadAction<UserData>) => {
+    createUser: (state, action: PayloadAction<UserData>) => {
       const newUserData = action.payload;
       
       if (state.data) {
@@ -64,5 +64,5 @@ const userSlice = createSlice({
 });
 
 
-export const { updateUserData,addUserData,deleteUser} = userSlice.actions;
+export const { updateUser,createUser,deleteUser} = userSlice.actions;
 export default userSlice.reducer;

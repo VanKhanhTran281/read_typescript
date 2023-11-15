@@ -1,12 +1,11 @@
-import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
-import { fetchUserData,patchUserData,createUserData,deleteUserData } from './api';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchUserData, patchUserData, createUserData, deleteUserData } from './api';
 
 
 export const fetchUser = createAsyncThunk<UserData, void>('user/fetchUser', async () => {
   const userData = await fetchUserData();
   return userData;
 });
-export const updateUserData = createAction<UserData>('user/updateUserData');
 export const updateUser = createAsyncThunk<UserData, Partial<UserData>>(
   'user/updateUser',
   async (userData) => {
@@ -21,7 +20,9 @@ export const createUser = createAsyncThunk<UserData, UserAddData>(
     return createdUserData;
   }
 );
-export const deleteUser = createAsyncThunk('user/deleteUser', async (id:number) => {
-  const deleteData = await deleteUserData(id);
-  return deleteData;
-});
+export const deleteUser = createAsyncThunk(
+  'user/deleteUser',
+  async (id: number) => {
+    const deleteData = await deleteUserData(id);
+    return deleteData;
+  });

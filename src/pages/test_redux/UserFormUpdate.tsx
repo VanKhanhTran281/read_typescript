@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAppDispatch } from '../../redux/store';
-import { updateUserData, fetchUser,deleteUser } from '../../redux/actions';
+import { updateUser, fetchUser,deleteUser } from '../../redux/actions';
 import { patchUserData,deleteUserData } from '../../redux/api'; 
 
 interface UserFormProps {
@@ -30,7 +30,7 @@ const UserFormUpdate: React.FC<UserFormProps> = ({ user, onUpdateUser ,reload}) 
       name: name,
     };
     const updatedUserData = await patchUserData(updatedUser);
-    await dispatch(updateUserData(updatedUserData));
+    await dispatch(updateUser(updatedUserData));
     await dispatch(fetchUser());
     onUpdateUser(updatedUserData);
     setIsEditing(false);
